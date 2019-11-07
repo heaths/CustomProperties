@@ -1,0 +1,26 @@
+HKCR
+{
+	CustomProperties.Executable.1 = s 'Executable class'
+	{
+		CLSID = s '{a3da9115-050d-42b5-8eac-10aaa8f73a76}'
+	}
+	CustomProperties.Executable = s 'Executable class'
+	{		
+		CurVer = s 'CustomProperties.Executable.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {a3da9115-050d-42b5-8eac-10aaa8f73a76} = s 'Executable class'
+		{
+			ProgID = s 'CustomProperties.Executable.1'
+			VersionIndependentProgID = s 'CustomProperties.Executable'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			TypeLib = s '{ce26a877-d9df-46eb-bfb3-105e7415279f}'
+			Version = s '1.0'
+		}
+	}
+}

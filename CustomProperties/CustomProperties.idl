@@ -1,0 +1,53 @@
+// CustomProperties.idl : IDL source for CustomProperties
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (CustomProperties.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    helpstring("Target machine architecture"),
+]
+typedef enum Architecture
+{
+    None = 0,
+    x86 = 0x14c,
+    IA64 = 0x200,
+    x64 = 0x8664,
+} Architecture;
+
+[
+    object,
+    uuid(e0f7e719-ec14-4431-8ebe-51986400cc9f),
+    dual,
+    nonextensible,
+    pointer_default(unique),
+    helpstring("Loads and parses and executable"),
+]
+interface IExecutable : IDispatch
+{
+    [propget, id(1), helpstring("Gets the target machine architecture")] HRESULT Architecture([out, retval] Architecture* pArchitecture);
+    [propget, id(2), helpstring("Gets whether the file is a managed assembly")] HRESULT IsManagedAssembly([out, retval] VARIANT_BOOL* pIsManagedAssembly);
+};
+
+[
+    uuid(ce26a877-d9df-46eb-bfb3-105e7415279f),
+    helpstring("Additional properties for various file types"),
+    version(1.0),
+]
+library CustomPropertiesLib
+{
+    importlib("stdole2.tlb");
+    [
+        uuid(a3da9115-050d-42b5-8eac-10aaa8f73a76)
+    ]
+    coclass Executable
+    {
+        [default] interface IExecutable;
+        interface IPersistFile;
+    };
+};
+
+import "shobjidl.idl";
